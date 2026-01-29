@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* MAIN BIG BOX */
+.signup-box {
+  width: 420px;
+  background: #ffffff;
+  padding: 55px 70px;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* TITLE */
+.signup-box h1 {
+  margin-bottom: 30px;
+  color: #1e3a8a;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* BUTTON COMMON */
+.signup-btn {
+  display: block;
+  padding: 16px;
+  margin-bottom: 22px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+/* USER BUTTON */
+.user-btn {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.user-btn:hover {
+  background: #2563eb;
+}
+
+/* LAWYER BUTTON */
+.lawyer-btn {
+  background: #4b77ef;
+  color: #ffffff;
+}
+
+.lawyer-btn:hover {
+  background: #1e40af;
+}

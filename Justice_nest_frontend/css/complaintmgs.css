@@ -1,0 +1,80 @@
+/* ====== RESET ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====== BODY ====== */
+body {
+  background: linear-gradient(135deg, #cfe9ff, #e6f3ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+/* ====== CARD ====== */
+.success-container .card {
+  background: #ffffff;
+  color: #333;
+  text-align: center;
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  animation: fadeIn 0.6s ease;
+}
+
+/* ====== ICON ====== */
+.icon {
+  font-size: 70px;
+  color: #007bff;
+  margin-bottom: 20px;
+  animation: pop 0.7s ease;
+}
+
+/* ====== HEADING ====== */
+h1 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #0056b3;
+}
+
+/* ====== PARAGRAPH ====== */
+p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* ====== BUTTONS ====== */
+.btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 500;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* Secondary Button */
+.btn.secondary {
+  background: #00aaff;
+}
+
+.btn.secondary:hover {
+  background: #008fd1;
+}
+

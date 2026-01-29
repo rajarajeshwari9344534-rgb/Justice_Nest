@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <title>Justice Nest - Login</title>
+</head>
+
+<body>
+
+  <div class="login-container card">
+    <a href="../index.html" class="brand" style="justify-content: center; margin-bottom: 24px;">
+      <div class="logo-mark">⚖️</div>
+      <div class="brand-title">Justice Nest</div>
+    </a>
+    <h2>Login to Your Account</h2>
+
+    <!-- Form submit goes directly to backend -->
+    <form onsubmit="handleLogin(event)">
+
+      <!-- Role selection -->
+      <!-- Role selection -->
+      <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="user">User</option>
+        <option value="lawyer">Lawyer</option>
+      </select>
+
+      <input type="email" name="email" placeholder="Email address" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+
+      <span class="signup-link">
+        Don’t have an account?
+        <a href="common.html">Sign up</a>
+      </span>
+    </form>
+
+    <div class="footer-note">
+      © 2025 Justice Nest | Empowering Lives
+    </div>
+  </div>
+
+  <script src="../js/login.js"></script>
+</body>
+
+</html>

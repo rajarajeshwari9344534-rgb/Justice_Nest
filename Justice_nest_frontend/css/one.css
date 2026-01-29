@@ -1,0 +1,85 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5f6f7;
+  color: #222;
+}
+
+.come{
+    margin-right: 2000px;
+    margin-top: 5px;
+    padding: 10px 20px;
+    border-radius: 13px;
+    background-color: rgb(229, 232, 235);
+    border: none;
+    color: #000408;
+    
+
+}
+.come a{
+    text-decoration: none;
+}
+
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 20px 20px;
+  background: linear-gradient(90deg,#0078ff,#0b73ff);
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* ===== MAIN ===== */
+.page-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 28px;
+}
+
+/* ===== COMPLAINT GRID ===== */
+.complaint-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(1000px,1fr));
+  gap: 28px;
+}
+
+.complaint-card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+
+.card-body p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.description {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #0b73ff;
+  border-radius: 8px;
+}
+
+
+
