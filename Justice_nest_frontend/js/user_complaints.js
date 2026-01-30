@@ -40,6 +40,15 @@ async function fetchMyComplaints() {
                     <p><strong>City:</strong> ${c.city}</p>
                     <p><strong>State:</strong> ${c.state}</p>
                     <div class="description">${c.complaint_details}</div>
+                    
+                    ${c.lawyer_name ? `
+                    <div class="lawyer-assignment" style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                        <p style="margin: 0; color: #166534; font-weight: 600;">Assigned Lawyer:</p>
+                        <p style="margin: 5px 0 0; color: #1e293b;"><strong>Name:</strong> ${c.lawyer_name}</p>
+                        <p style="margin: 2px 0 0; color: #1e293b;"><strong>Phone:</strong> ${c.lawyer_phone}</p>
+                    </div>
+                    ` : ""}
+
                     <div class="card-footer">
                         <span>${new Date(c.created_at).toLocaleDateString()}</span>
                         <div class="actions">

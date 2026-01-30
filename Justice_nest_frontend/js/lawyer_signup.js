@@ -1,10 +1,20 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
+let isSubmitting = false;
+
 function lawyerSignup(event) {
   event.preventDefault();
+  if (isSubmitting) return;
 
   const form = document.querySelector(".register-form");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
+
   const formData = new FormData(form);
+
+  isSubmitting = true;
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Registering...";
 
   fetch(`${BASE_URL}/lawyers/`, {
     method: "POST",
@@ -21,6 +31,9 @@ function lawyerSignup(event) {
           errorMsg = data.detail.map(err => err.msg).join("\n");
         }
         alert(errorMsg);
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalBtnText;
         return;
       }
 
@@ -30,5 +43,8 @@ function lawyerSignup(event) {
     .catch((error) => {
       console.error(error);
       alert("Server error ❌");
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
     });
 }

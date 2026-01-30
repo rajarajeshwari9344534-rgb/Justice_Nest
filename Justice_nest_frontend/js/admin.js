@@ -36,26 +36,41 @@ async function fetchPendingLawyers() {
     lawyers.forEach(lawyer => {
       const card = document.createElement("div");
       card.className = "lawyer-card";
+
+      const isPdf = lawyer.id_proof_url.toLowerCase().endsWith('.pdf');
+
       card.innerHTML = `
-                <div class="lawyer-info">
-                    <h3>${lawyer.name}</h3>
-                    <p><strong>Email:</strong> ${lawyer.email}</p>
-                    <p><strong>Experience:</strong> ${lawyer.years_of_experience} years</p>
-                    <p><strong>Specialization:</strong> ${lawyer.specialization}</p>
-                    <p><strong>Region:</strong> ${lawyer.city}</p>
+                <div class="lawyer-card-header">
+                    <img src="${lawyer.photo_url || '../assets/default-lawyer.png'}" class="admin-lawyer-photo" alt="Profile">
+                    <div>
+                        <h3>${lawyer.name}</h3>
+                        <small style="color: #718096;">Member since ${new Date(lawyer.created_at).toLocaleDateString()}</small>
+                    </div>
                 </div>
-                <div class="proof-section">
-                     <p><strong>ID Proof:</strong></p>
-                     ${lawyer.id_proof_url.toLowerCase().endsWith('.pdf')
-          ? `<a href="${lawyer.id_proof_url}" target="_blank" class="pdf-link">📄 View PDF Document</a>`
+                <div class="lawyer-card-body">
+                    <ul class="lawyer-details-list">
+                        <li><b>Email:</b> <span>${lawyer.email}</span></li>
+                        <li><b>Phone:</b> <span>${lawyer.phone_number || 'N/A'}</span></li>
+                        <li><b>Exp:</b> <span>${lawyer.years_of_experience} Years</span></li>
+                        <li><b>Specialty:</b> <span>${lawyer.specialization}</span></li>
+                        <li><b>Location:</b> <span>${lawyer.city}, ${lawyer.state || ''}</span></li>
+                    </ul>
+                    
+                    <div class="proof-preview-container">
+                        ${isPdf
+          ? `<a href="${lawyer.id_proof_url}" target="_blank" class="pdf-link-container">
+                               <span style="font-size: 30px;">📄</span>
+                               <span>View PDF ID Proof</span>
+                             </a>`
           : `<a href="${lawyer.id_proof_url}" target="_blank">
-                             <img src="${lawyer.id_proof_url}" alt="ID Proof" class="proof-img">
-                           </a>`
+                               <img src="${lawyer.id_proof_url}" alt="ID Proof" class="proof-img">
+                             </a>`
         }
+                    </div>
                 </div>
-                <div class="actions">
-                    <button class="btn approve" onclick="approveLawyer(${lawyer.id})">Approve</button>
-                    <button class="btn reject" onclick="rejectLawyer(${lawyer.id})">Reject</button>
+                <div class="lawyer-card-actions">
+                    <button class="btn admin-btn approve" onclick="approveLawyer(${lawyer.id})">Approve</button>
+                    <button class="btn admin-btn reject" onclick="rejectLawyer(${lawyer.id})">Reject</button>
                 </div>
             `;
       container.appendChild(card);

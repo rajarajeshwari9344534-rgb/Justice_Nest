@@ -52,7 +52,7 @@
   </div>
 
   <!-- FORM -->
-  <form class="form-container" id="complaint-form" onsubmit="handleComplaintSubmit(event)">
+  <form class="form-container" id="complaint-form">
 
     <label>Full Name </label>
     <input type="text" name="name" placeholder="Enter your full name" pattern="[A-Za-z\s]{3,}"
@@ -63,8 +63,8 @@
 
 
     <label>Phone Number </label>
-    <input type="tel" name="phone" placeholder="+91-9876543210" pattern="^\+91[-\s]?[0-9]{10}$"
-      title="Phone number must be 10 digits with +91" required>
+    <input type="tel" name="phone" placeholder="9876543210" pattern="[6-9][0-9]{9}" maxlength="10" minlength="10"
+      title="Phone number must be exactly 10 digits" required>
 
     <div class="two-col">
       <div>

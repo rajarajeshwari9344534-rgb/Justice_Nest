@@ -1,3 +1,4 @@
+import re
 from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile
 from typing import Optional
 import cloudinary
@@ -86,6 +87,7 @@ def add_lawyer(
     email: str = Form(...),
     phone_number: str = Form(...),
     city: str = Form(None),
+    state: str = Form(None),
     gender: str = Form(None),
     specialization: str = Form(None),
     years_of_experience: float = Form(...),
@@ -102,6 +104,10 @@ def add_lawyer(
     # Password hash
     hashed_password = get_password_hash(password)
 
+    # Phone validation
+    if not re.match(r"^[6-9]\d{9}$", phone_number):
+        raise HTTPException(status_code=400, detail="Phone number must be exactly 10 digits starting with 6-9")
+
     # Upload to Cloudinary
     try:
         result_id = cloudinary.uploader.upload(id_proof.file, folder="lawyers/id_proof")
@@ -117,6 +123,7 @@ def add_lawyer(
         email=email,
         phone_number=phone_number,
         city=city,
+        state=state,
         gender=gender,
         specialization=specialization,
         years_of_experience=years_of_experience,
@@ -144,6 +151,7 @@ def update_lawyer(
     lawyer_id: int,
     name: Optional[str] = Form(None),
     city: Optional[str] = Form(None),
+    state: Optional[str] = Form(None),
     specialization: Optional[str] = Form(None),
     gender: Optional[str] = Form(None),
     fees_range: Optional[str] = Form(None),
@@ -165,6 +173,8 @@ def update_lawyer(
         lawyer.name = name
     if city:
         lawyer.city = city
+    if state:
+        lawyer.state = state
     if specialization:
         lawyer.specialization = specialization
     if gender:
@@ -172,6 +182,8 @@ def update_lawyer(
     if fees_range:
         lawyer.fees_range = fees_range
     if phone_number:
+        if not re.match(r"^[6-9]\d{9}$", phone_number):
+            raise HTTPException(status_code=400, detail="Phone number must be exactly 10 digits starting with 6-9")
         lawyer.phone_number = phone_number
     if years_of_experience is not None:
         lawyer.years_of_experience = years_of_experience

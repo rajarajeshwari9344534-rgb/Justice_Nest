@@ -10,6 +10,7 @@ class Lawyers(Base):
     email = Column(String, unique=True, nullable=False)
     phone_number = Column(String, nullable=False)
     city = Column(String)
+    state = Column(String)
     specialization = Column(String)
     years_of_experience = Column(Float, nullable=False)
     gender = Column(String, nullable=True)

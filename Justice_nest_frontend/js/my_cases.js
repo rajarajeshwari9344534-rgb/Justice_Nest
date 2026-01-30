@@ -37,6 +37,7 @@ function renderComplaints(list) {
         div.className = "complaint-card card";
         div.innerHTML = `
             <h3>${c.name}</h3>
+            <p><b>Phone:</b> ${c.number}</p>
             <p><b>City:</b> ${c.city}</p>
             <p><b>Status:</b> <span class="status-tag ${c.status}">${c.status.toUpperCase()}</span></p>
             <div class="description-preview">
@@ -58,6 +59,7 @@ function viewDetails(c) {
     body.innerHTML = `
         <p><b>Case ID:</b> #${c.id}</p>
         <p><b>Client name:</b> ${c.name}</p>
+        <p><b>Phone:</b> ${c.number}</p>
         <p><b>City:</b> ${c.city}</p>
         <p><b>State:</b> ${c.state}</p>
         <p><b>Status:</b> ${c.status}</p>
@@ -85,10 +87,12 @@ async function resolveComplaint(id) {
     if (!confirm("Are you sure you want to mark this case as RESOLVED?")) return;
 
     try {
+        const formData = new FormData();
+        formData.append("status", "resolved");
+
         const res = await fetch(`${BASE_URL}/complaints/${id}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: "resolved" })
+            body: formData
         });
 
         if (res.ok) {

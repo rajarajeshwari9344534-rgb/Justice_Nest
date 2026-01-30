@@ -1,4 +1,5 @@
 const API_URL = "http://127.0.0.1:8000";
+let isSubmitting = false;
 
 // Handle complaint form submission
 document.addEventListener("DOMContentLoaded", function () {
@@ -11,9 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
 async function handleComplaintSubmit(event) {
   event.preventDefault();
 
+  if (isSubmitting) return;
+
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
+
+  // Prevent duplicate submissions immediately
+  isSubmitting = true;
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Registering...";
+
   const user_id = localStorage.getItem("user_id");
   if (!user_id) {
     alert("Please login first to register a complaint");
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
     window.location.href = "../pages/login.html";
     return;
   }
@@ -29,6 +43,9 @@ async function handleComplaintSubmit(event) {
   // Validate required fields
   if (!name || !number || !city || !state || !gender || !complaint_details) {
     alert("Please fill all required fields");
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
     return;
   }
 
@@ -60,9 +77,15 @@ async function handleComplaintSubmit(event) {
       window.location.href = "../pages/list.html";
     } else {
       alert(data.detail || "Failed to register complaint");
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
     }
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred while registering complaint");
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
   }
 }

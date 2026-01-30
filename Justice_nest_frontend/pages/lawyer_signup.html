@@ -36,11 +36,15 @@
                             <input type="password" name="password" placeholder="Your password" required>
 
                             <label>Phone Number</label>
-                            <input type="tel" name="phone_number" placeholder="+91 9876543210" required
-                                   pattern="[6-9]{1}[0-9]{9}">
+                            <input type="tel" name="phone_number" placeholder="9876543210" required
+                                   pattern="[6-9][0-9]{9}" maxlength="10" minlength="10"
+                                   title="Phone number must be exactly 10 digits">
 
                             <label>City</label>
-                            <input type="text" name="city" placeholder="Your city or region" required minlength="2">
+                            <input type="text" name="city" placeholder="Your city" required minlength="2">
+
+                            <label>State</label>
+                            <input type="text" name="state" placeholder="Your state" required minlength="2">
 
                             <label>Gender</label>
                             <select name="gender" required>

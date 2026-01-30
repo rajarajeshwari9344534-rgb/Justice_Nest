@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
+import re
 from typing import Optional
 
 class ComplaintCreate(BaseModel):
@@ -10,6 +11,13 @@ class ComplaintCreate(BaseModel):
     gender: Optional[str] = None
     complaint_details: str
     complaint_file_url: Optional[str] = None
+
+    @field_validator('number')
+    @classmethod
+    def validate_number(cls, v):
+        if not re.match(r"^[6-9]\d{9}$", v):
+            raise ValueError("Phone number must be exactly 10 digits starting with 6-9")
+        return v
 
 
 class ComplaintUpdate(BaseModel):

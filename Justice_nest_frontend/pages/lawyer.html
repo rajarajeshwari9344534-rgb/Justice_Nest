@@ -47,14 +47,71 @@
     </div>
   </section>
 
-  <!-- ====== SEARCH BAR / FILTER ====== -->
-  <!-- <div class="container">
-    <div class="search-row">
-      <div class="search-card">
-      <input type="text" placeholder="Search by city or state..." >    
+  <!-- ====== SEARCH & FILTER SECTION ====== -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-card">
+        <div class="filter-row main-search">
+          <div class="input-group search-box">
+            <span class="input-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Search by name or specialization...">
+          </div>
+        </div>
+
+        <div class="filter-row secondary-filters">
+          <div class="input-group">
+            <select id="spec-filter">
+              <option value="">All Specializations</option>
+              <option value="Dowry">Dowry Cases</option>
+              <option value="Domestic Violence">Domestic Violence</option>
+              <option value="Family Law">Family Law</option>
+              <option value="Property Law">Property Law</option>
+              <option value="Criminal Law">Criminal Law</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <input type="text" id="city-filter" placeholder="Filter by City">
+          </div>
+
+          <div class="input-group">
+            <input type="text" id="state-filter" placeholder="Filter by State">
+          </div>
+
+          <div class="input-group">
+            <select id="gender-filter">
+              <option value="">All Genders</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-row numeric-filters">
+          <div class="input-group">
+            <label>Min Experience (Years)</label>
+            <input type="number" id="exp-filter" min="0" placeholder="0">
+          </div>
+
+          <div class="input-group">
+            <label>Max Fees (₹)</label>
+            <input type="number" id="fees-filter" min="0" placeholder="No Limit">
+          </div>
+
+          <div class="input-group">
+            <label>Search by Phone</label>
+            <input type="tel" id="phone-filter" placeholder="Phone number">
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+          <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+        </div>
       </div>
     </div>
-  </div> -->
+  </section>
 
   <!-- ====== LAWYER CARDS GRID ====== -->
   <main class="container">

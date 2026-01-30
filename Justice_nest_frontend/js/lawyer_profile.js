@@ -32,11 +32,21 @@ async function fetchProfile() {
     }
 }
 
+let isSubmitting = false;
+
 document.getElementById("profile-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerText;
 
     const lawyer_id = localStorage.getItem("user_id");
     const formData = new FormData(e.target);
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Saving Changes...";
 
     // Remove empty photo if not selected (FormData handles file input automatically, sending empty file object if not selected)
     // Backend expects 'photo' as UploadFile = File(None). If file is empty, it might be an issue?
@@ -73,9 +83,15 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
             location.reload();
         } else {
             alert(res.detail || "Update Failed");
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.innerText = originalBtnText;
         }
     } catch (e) {
         console.error(e);
         alert("Server Error");
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalBtnText;
     }
 });

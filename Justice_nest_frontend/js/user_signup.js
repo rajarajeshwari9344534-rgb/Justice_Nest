@@ -1,7 +1,14 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
+let isSubmitting = false;
+
 async function userSignup(event) {
   event.preventDefault();
+
+  if (isSubmitting) return;
+
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
 
   const fullname = document.getElementById("fullname").value;
   const email = document.getElementById("email").value;
@@ -14,6 +21,10 @@ async function userSignup(event) {
   }
 
   try {
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Creating Account...";
+
     const response = await fetch(`${BASE_URL}/users/signup`, {
       method: "POST",
       headers: {
@@ -39,9 +50,15 @@ async function userSignup(event) {
         errorMsg = data.detail.map(err => err.msg).join("\n");
       }
       alert(errorMsg);
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
     }
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred during signup.");
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
   }
 }

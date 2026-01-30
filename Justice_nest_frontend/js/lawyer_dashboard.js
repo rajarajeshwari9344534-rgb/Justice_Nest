@@ -57,6 +57,7 @@ function renderComplaints(list, containerId, isPending) {
         div.className = "complaint-card card";
         div.innerHTML = `
             <h3>${c.name}</h3>
+            <p><b>Phone:</b> ${c.number}</p>
             <p><b>City:</b> ${c.city}</p>
             <p><b>Status:</b> ${c.status}</p>
             <div class="description-preview">
@@ -78,6 +79,7 @@ function viewDetails(c) {
     body.innerHTML = `
         <p><b>Complaint ID:</b> #${c.id}</p>
         <p><b>Name:</b> ${c.name}</p>
+        <p><b>Phone:</b> ${c.number}</p>
         <p><b>City:</b> ${c.city}</p>
         <p><b>Gender:</b> ${c.gender}</p>
         <p><b>Status:</b> ${c.status}</p>

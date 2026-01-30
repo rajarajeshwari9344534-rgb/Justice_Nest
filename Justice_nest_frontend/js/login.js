@@ -1,9 +1,15 @@
 const BASE_URL = "http://127.0.0.1:8000";
 
+let isSubmitting = false;
+
 async function handleLogin(event) {
   event.preventDefault();
+  if (isSubmitting) return;
 
   const form = event.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerText;
+
   const role = form.role.value;
   const email = form.email.value;
   const password = form.password.value;
@@ -17,6 +23,10 @@ async function handleLogin(event) {
     alert("Please select a role");
     return;
   }
+
+  isSubmitting = true;
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Logging in...";
 
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -63,9 +73,15 @@ async function handleLogin(event) {
 
     } else {
       alert(data.detail || "Login failed");
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
     }
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred. Please try again.");
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalBtnText;
   }
 }

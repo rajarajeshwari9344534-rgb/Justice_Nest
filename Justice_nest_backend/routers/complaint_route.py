@@ -1,3 +1,4 @@
+import re
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile, Form
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -24,6 +25,9 @@ async def create_complaint(
     file: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
 ):
+    if not re.match(r"^[6-9]\d{9}$", number):
+        raise HTTPException(status_code=400, detail="Phone number must be exactly 10 digits starting with 6-9")
+    
     file_url = None
     if file:
         try:
@@ -55,8 +59,24 @@ async def create_complaint(
 
 
 @complaint_router.get("/user/{user_id}")
-def get_user_complaints(user_id: int,db: Session = Depends(get_db)):
-    return (db.query(Complaints).filter(Complaints.user_id == user_id).all())
+def get_user_complaints(user_id: int, db: Session = Depends(get_db)):
+    from models.lawyers import Lawyers
+    
+    results = (
+        db.query(Complaints, Lawyers.name.label("lawyer_name"), Lawyers.phone_number.label("lawyer_phone"))
+        .outerjoin(Lawyers, Complaints.lawyer_id == Lawyers.id)
+        .filter(Complaints.user_id == user_id)
+        .all()
+    )
+    
+    complaints = []
+    for complaint, lawyer_name, lawyer_phone in results:
+        c_dict = {column.name: getattr(complaint, column.name) for column in complaint.__table__.columns}
+        c_dict["lawyer_name"] = lawyer_name
+        c_dict["lawyer_phone"] = lawyer_phone
+        complaints.append(c_dict)
+        
+    return complaints
 
 
 @complaint_router.get("/pending")
@@ -117,6 +137,8 @@ async def update_complaint(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Complaint not found")
 
     if number is not None:
+        if not re.match(r"^[6-9]\d{9}$", number):
+            raise HTTPException(status_code=400, detail="Phone number must be exactly 10 digits starting with 6-9")
         complaint.number = number
     if city is not None:
         complaint.city = city
