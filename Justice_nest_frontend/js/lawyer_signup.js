@@ -6,7 +6,7 @@ function lawyerSignup(event) {
   event.preventDefault();
   if (isSubmitting) return;
 
-  const form = document.querySelector(".register-form");
+  const form = event.target;
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalBtnText = submitBtn.innerText;
 
@@ -37,7 +37,15 @@ function lawyerSignup(event) {
         return;
       }
 
-      alert("Lawyer registered successfully ✅");
+      // Store lawyer data and token for auto-login
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("user_id", data.lawyer_id);
+      localStorage.setItem("user_email", data.email);
+      localStorage.setItem("user_name", data.name);
+      localStorage.setItem("status", data.status);
+      localStorage.setItem("user_role", "lawyer");
+
+      alert("Lawyer registered successfully ✅ Welcome to your dashboard.");
       window.location.href = "home.html"; // redirect to home
     })
     .catch((error) => {

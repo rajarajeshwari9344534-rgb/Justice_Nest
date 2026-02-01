@@ -4,44 +4,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Justice Nest</title>
   <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <title>Justice Nest - Login</title>
 </head>
 
 <body>
 
-  <div class="login-container card">
-    <a href="../index.html" class="brand" style="justify-content: center; margin-bottom: 24px;">
-      <div class="logo-mark">⚖️</div>
-      <div class="brand-title">Justice Nest</div>
-    </a>
-    <h2>Login to Your Account</h2>
+  <div class="auth-page-wrapper">
+    <div class="auth-card">
+      <a href="../index.html" class="brand" style="justify-content: center; margin-bottom: 32px;">
+        <div class="logo-mark">⚖️</div>
+        <div class="brand-title">Justice Nest</div>
+      </a>
 
-    <!-- Form submit goes directly to backend -->
-    <form onsubmit="handleLogin(event)">
+      <h2>Welcome Back</h2>
+      <p>Log in to manage your cases and access support.</p>
 
-      <!-- Role selection -->
-      <!-- Role selection -->
-      <select name="role" required>
-        <option value="" disabled selected>Select Role</option>
-        <option value="user">User</option>
-        <option value="lawyer">Lawyer</option>
-      </select>
+      <form class="auth-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="role">Log in as</label>
+          <select id="role" required>
+            <option value="user">Citizen / User</option>
+            <option value="lawyer">Legal Professional</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
 
-      <input type="email" name="email" placeholder="Email address" required>
-      <input type="password" name="password" placeholder="Password" required>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="e.g. name@example.com" required>
+        </div>
 
-      <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required>
+        </div>
 
-      <span class="signup-link">
-        Don’t have an account?
-        <a href="common.html">Sign up</a>
-      </span>
-    </form>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Log In</button>
 
-    <div class="footer-note">
-      © 2025 Justice Nest | Empowering Lives
+        <div class="auth-form-footer">
+          New to Justice Nest? <a href="signup_choice.html">Create an account</a>
+        </div>
+      </form>
     </div>
   </div>
 

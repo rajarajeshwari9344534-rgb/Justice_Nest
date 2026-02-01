@@ -40,8 +40,15 @@ async function userSignup(event) {
     const data = await response.json();
 
     if (response.ok) {
-      alert("Signup successful! Please login.");
-      window.location.href = "login.html";
+      // Store user data and token for auto-login
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("user_email", data.email);
+      localStorage.setItem("user_name", data.name);
+      localStorage.setItem("user_role", "user");
+
+      alert("Signup successful! Welcome to Justice Nest.");
+      window.location.href = "../index.html";
     } else {
       let errorMsg = "Signup failed";
       if (typeof data.detail === "string") {

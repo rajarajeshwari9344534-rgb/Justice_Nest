@@ -138,9 +138,17 @@ def add_lawyer(
     db.commit()
     db.refresh(new_lawyer)
 
+    # Generate Token for Auto-Login
+    access_token = create_access_token(data={"sub": new_lawyer.email, "role": "lawyer", "id": new_lawyer.id})
+
     return {
         "message": "Lawyer registered successfully. Please wait for admin approval.",
-        "lawyer_id": new_lawyer.id
+        "access_token": access_token,
+        "token_type": "bearer",
+        "lawyer_id": new_lawyer.id,
+        "name": new_lawyer.name,
+        "email": new_lawyer.email,
+        "status": new_lawyer.status
     }
 
 # -----------------------------

@@ -34,8 +34,16 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(new_user)
 
+        # Generate JWT Token for Auto-Login
+        access_token = create_access_token(data={"sub": new_user.email, "user_id": new_user.id})
+
         return {
             "message": "User registered successfully",
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user_id": new_user.id,
+            "email": new_user.email,
+            "name": new_user.name
         }
     except Exception as e:
         print(f"SIGNUP ERROR: {str(e)}")
