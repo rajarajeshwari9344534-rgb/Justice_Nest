@@ -48,7 +48,7 @@ def get_stats(db: Session = Depends(get_db)):
     }
 
 # -----------------------------
-# REJECT LAWYER (Optional but good to have)
+# REJECT LAWYER 
 # -----------------------------
 @admin_router.patch("/reject_lawyer/{lawyer_id}")
 def reject_lawyer(lawyer_id: int, db: Session = Depends(get_db)):
