@@ -60,11 +60,7 @@ async function handleLogin(event) {
       } else if (role === "lawyer") {
         if (data.status === "pending") {
           alert("Your account is pending approval by Admin.");
-          // Optional: Redirect to a 'pending' page or stay here. 
-          // For now, let them go to dashboard but maybe restrict actions? 
-          // Or typically, don't allow login at all? 
-          // The user request implies: "lawyers register panna home.html page ku poganum"
-          // So we redirect home.html.
+          
           window.location.href = "../pages/home.html";
         } else {
           window.location.href = "../pages/home.html";
